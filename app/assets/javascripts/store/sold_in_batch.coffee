@@ -1,7 +1,7 @@
 Spree.showSetCount = (count) ->
   multiplier = $('div#set_contains').data("set-count")
   quantity = count * multiplier
-  $('div#set_contains').html 'Sold in increments '+multiplier+', your purchase: '+quantity
+  $('div#set_contains').html 'Sold in increments of '+multiplier+', your purchase: '+quantity
 
 # setup count updater if we have a set count
 $ ->

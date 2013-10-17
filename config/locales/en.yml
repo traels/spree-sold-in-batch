@@ -2,4 +2,4 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 en:
   spree:
-    set_contains_x_products: "Set contains %{count} pcs"
+    set_contains_x_products: "Sold in increments of %{count}"
