@@ -15,4 +15,6 @@ group :test do
   gem "coffee-rails"
 end
 
+gem 'deface', '~> 1.0'
+
 gemspec

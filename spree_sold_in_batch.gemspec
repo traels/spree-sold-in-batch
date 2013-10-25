@@ -2,9 +2,9 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_sold_in_batch'
-  s.version     = '0.1.1'
+  s.version     = '0.1.2'
   s.summary     = 'Sell products in counts of X'
-  s.description = 'Will add details for customers to see how many they buy if a product is sold in a specific quantity.'
+  s.description = 'Will add dropdowns for quantity.'
   s.required_ruby_version = '>= 1.9.3'
 
   s.author    = 'Simon Træls Ravn'
@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.0.3'
+  s.add_dependency 'spree_core'
+  s.add_dependency 'deface', '~> 1.0'
 
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'

@@ -16,23 +16,33 @@ describe Spree::Product do
   end
 
   describe "product page" do
-    it "should show the user a total quantity" do
+    it "should have select box for quantity" do
       product1 = create(:product, :set_count => 10)
 
       visit "/products/#{product1.permalink}"
 
-      page.should have_content("Set contains #{product1.set_count} pcs")
+      page.should have_select "variants[#{product1.master.id}]"
     end
   end
 
-  describe "product page", js: true do
-    it "should update text when changing cart quantity" do
+  describe "shopping cart", js: true do
+    it "should have select box for quantity" do
       product1 = create(:product, :set_count => 10)
 
       visit "/products/#{product1.permalink}"
-      fill_in "variants_#{product1.master.id}", :with => 12
+      select (3*product1.set_count).to_i, :from => "variants[#{product1.master.id}]"
+      click_button('Add To Cart')
+      page.should have_select "order[line_items_attributes][0][quantity]"
+    end
 
-      page.should have_content("Set contains #{product1.set_count} pcs, your purchase: 120 pcs")
+    it "should select correct quantity in dropdown" do
+      product1 = create(:product, :set_count => 10)
+
+      visit "/products/#{product1.permalink}"
+      select (3*product1.set_count).to_i, :from => "variants[#{product1.master.id}]"
+      click_button('Add To Cart')
+      page.should have_select "order[line_items_attributes][0][quantity]"
+      find_field('order[line_items_attributes][0][quantity]').find('option[selected]').text.to_i.should == (3*product1.set_count).to_i
     end
   end
 
