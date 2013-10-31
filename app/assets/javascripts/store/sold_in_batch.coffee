@@ -9,3 +9,8 @@ $ ->
     if index == 0
       $('div.add-to-cart input').change () ->
         Spree.showSetCount($(this).val())
+  if ($ 'form#update-cart').is('*')
+    ($ 'form#update-cart a.delete').show().one 'click', ->
+      ($ this).parents('.line-item').first().find('select').val 0
+      ($ this).parents('form').first().submit()
+      false
