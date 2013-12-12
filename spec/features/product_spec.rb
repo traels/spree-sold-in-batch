@@ -6,8 +6,11 @@ describe Spree::Product do
       product = create(:product)
       user = create(:admin_user, :email => "admin@person.com", :password => "password", :password_confirmation => "password")
       sign_in_admin!(user)
-      visit "/admin/products"
-      within('table.index') { click_link "Edit" }
+#      visit "/admin/products"
+#      within('table.index') { click_link "Edit" }
+
+      visit "/admin/products/#{product.permalink}/edit"
+
       fill_in 'Set Count', :with => 6
       click_button "Update"
       page.should have_content("successfully updated!")
