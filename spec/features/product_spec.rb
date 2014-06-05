@@ -9,7 +9,7 @@ describe Spree::Product do
 #      visit "/admin/products"
 #      within('table.index') { click_link "Edit" }
 
-      visit "/admin/products/#{product.permalink}/edit"
+      visit "/admin/products/#{product.to_param}/edit"
 
       fill_in 'Set Count', :with => 6
       click_button "Update"
@@ -22,28 +22,31 @@ describe Spree::Product do
     it "should have select box for quantity" do
       product1 = create(:product, :set_count => 10)
 
-      visit "/products/#{product1.permalink}"
+      visit "/products/#{product1.to_param}"
 
-      page.should have_select "variants[#{product1.master.id}]"
+      page.should have_select "quantity"
     end
   end
 
   describe "shopping cart", js: true do
     it "should have select box for quantity" do
-      product1 = create(:product, :set_count => 10)
+      product1 = create(:product, :name => "RoR Mug", :set_count => 10)
 
-      visit "/products/#{product1.permalink}"
-      select (3*product1.set_count).to_i, :from => "variants[#{product1.master.id}]"
-      click_button('Add To Cart')
+    visit spree.root_path
+    click_link "RoR Mug"
+
+#      visit "/products/#{product1.to_param}"
+      select (3*product1.set_count).to_i, :from => "quantity"
+      click_button('add-to-cart-button')
       page.should have_select "order[line_items_attributes][0][quantity]"
     end
 
     it "should select correct quantity in dropdown" do
       product1 = create(:product, :set_count => 10)
 
-      visit "/products/#{product1.permalink}"
-      select (3*product1.set_count).to_i, :from => "variants[#{product1.master.id}]"
-      click_button('Add To Cart')
+      visit "/products/#{product1.to_param}"
+      select (3*product1.set_count).to_i, :from => "quantity"
+      click_button('add-to-cart-button')
       page.should have_select "order[line_items_attributes][0][quantity]"
       find_field('order[line_items_attributes][0][quantity]').find('option[selected]').text.to_i.should == (3*product1.set_count).to_i
     end

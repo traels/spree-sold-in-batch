@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'spree', github: 'spree/spree', branch: '2-1-stable'
+gem 'spree', '~>2.2'
 
 # Provides basic authentication functionality for testing parts of your engine
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-1-stable'
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-2-stable'
 
 group :test do
   gem 'therubyracer', :platforms => :ruby
@@ -12,7 +12,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'factory_girl_rails', '~> 4.2'
-  gem "sass", :require => 'sass'
+  gem "sass-rails", '~>4.0.2'# :require => 'sass'
   gem "coffee-rails"
 end
 

@@ -38,7 +38,7 @@ require 'spree_sold_in_batch/factories'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-
+  config.include Capybara::DSL
   # == URL Helpers
   #
   # Allows access to Spree's routes in specs:
@@ -73,7 +73,7 @@ RSpec.configure do |config|
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
   config.before :each do
-    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
+    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
   end
 
