@@ -1,1 +1,1 @@
-<%= select_tag (@product.variants_and_option_values.any? ? :quantity : :quantity), options_for_select((1..200).reject{|i| i % @product.set_count != 0 }), :class => 'title' %>
+<%= select_tag (@product.variants_and_option_values.any? ? :quantity : :quantity), options_for_select((1..1000).reject{|i| i % @product.set_count != 0 }), :class => 'title' %>
